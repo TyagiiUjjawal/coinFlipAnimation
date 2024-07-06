@@ -31,8 +31,14 @@
 }
 
 .tip-button.clicked {
+  opacity: 0.8;
   animation: 150ms ease-in-out 1 shake;
   pointer-events: none;
+}
+.tip-button:hover {
+  background: linear-gradient(135deg, #41a04e, #0a192f);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  opacity: 0.8;
 }
 
 .tip-button.clicked .tip-button__text {
@@ -75,6 +81,7 @@
   opacity: 1;
   position: relative;
   transition: opacity 100ms linear 500ms;
+  color:#41a04e;
   z-index: 3;
 }
 
