@@ -1,60 +1,67 @@
-.coin {
-  --front-y-multiplier: 0;
-  --back-y-multiplier: 0;
-  --coin-y-multiplier: 0;
-  --coin-x-multiplier: 0;
-  --coin-scale-multiplier: 0;
-  --coin-rotation-multiplier: 0;
-  --shine-opacity-multiplier: 0.4;
-  --shine-bg-multiplier: 50%;
-  bottom: calc(var(--coin-y-multiplier) * 1rem - 3.5rem);
-  height: 10rem; 
-  margin-bottom: 0.9rem;
-  position: absolute;
-  right: calc(var(--coin-x-multiplier) * 34% + 16%);
-  transform: translateX(50%) scale(calc(0.4 + var(--coin-scale-multiplier))) rotate(calc(var(--coin-rotation-multiplier) * -1deg));
-  transition: opacity 100ms linear 200ms;
-  width: 10rem;
-  z-index: 3;
+/* Container for centering the button */
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
-.coin-normal {
+
+.tip-button {
+  background: linear-gradient(135deg, #0a192f, #0a192f);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: "Quicksand", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  height: 3rem;
+  margin-bottom: -4rem;
   outline: 0;
   position: relative;
   top: 0;
   transform-origin: 0% 100%;
-  transition: transform 50ms ease-in-out;
-  width: 9.5rem;
-  -webkit-tap-highlight-color: transparent;
+  transition: transform 50ms ease-in-out, box-shadow 0.3s ease-in-out;
+  width: 12rem;
+  color: #ffffff;
 }
-.coin-normal:active {
+
+.tip-button:active {
   transform: rotate(4deg);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
-.coin-normal.shrink-landing::before {
-  transition: width 200ms ease-in;
-  width: 0;
-}
-.coin-normal.clicked {
+
+.tip-button.clicked {
   animation: 150ms ease-in-out 1 shake;
   pointer-events: none;
 }
-.coin-normal.clicked .coin-normal__text {
+
+.tip-button.clicked .tip-button__text {
   opacity: 0;
   transition: opacity 100ms linear 200ms;
 }
-.coin-normal.clicked::before {
+
+.tip-button.clicked::before {
   height: 0.5rem;
   width: 60%;
 }
-.coin-normal.clicked .coin {
+
+.tip-button.clicked .coin {
   transition: margin-bottom 1s linear 200ms;
   margin-bottom: 0;
 }
-.coin-normal.coin-landed::after {
+
+.tip-button.shrink-landing::before {
+  transition: width 200ms ease-in;
+  width: 0;
+}
+
+.tip-button.coin-landed::after {
   opacity: 1;
   transform: scale(1);
   transform-origin: 50% 100%;
 }
-.coin-normal.coin-landed .coin-wrapper {
+
+.tip-button.coin-landed .coin-wrapper {
   background: radial-gradient(circle at 35% 97%, rgba(3, 16, 50, 0.4) 0.04rem, transparent 0.04rem), radial-gradient(circle at 45% 92%, rgba(3, 16, 50, 0.4) 0.04rem, transparent 0.02rem), radial-gradient(circle at 55% 98%, rgba(3, 16, 50, 0.4) 0.04rem, transparent 0.04rem), radial-gradient(circle at 65% 96%, rgba(3, 16, 50, 0.4) 0.06rem, transparent 0.06rem);
   background-position: center bottom;
   background-size: 100%;
@@ -62,18 +69,18 @@
   opacity: 0;
   transform: scale(2) translateY(-10px);
 }
-.coin-normal__text {
-  color: #41a04e;
+
+.tip-button__text {
   margin-right: 1.8rem;
-  font-size: 0.7rem;
   opacity: 1;
   position: relative;
   transition: opacity 100ms linear 500ms;
   z-index: 3;
 }
-.coin-normal::before {
-  border:solid 1px #41a04e;
-  border-radius: 0.25rem;
+
+.tip-button::before {
+  border: solid 1px #41a04e;
+  border-radius: 30px;
   bottom: 0;
   content: "";
   display: block;
@@ -85,9 +92,10 @@
   width: 100%;
   z-index: 2;
 }
-.coin-normal::after {
+
+.tip-button::after {
   bottom: -1rem;
-  color: #e9f4ff;
+  color: #41a04e;
   content: "Thank you!";
   height: 110%;
   left: 0;
@@ -117,6 +125,25 @@
   width: 100%;
 }
 
+.coin {
+  --front-y-multiplier: 0;
+  --back-y-multiplier: 0;
+  --coin-y-multiplier: 0;
+  --coin-x-multiplier: 0;
+  --coin-scale-multiplier: 0;
+  --coin-rotation-multiplier: 0;
+  --shine-opacity-multiplier: 0.4;
+  --shine-bg-multiplier: 50%;
+  bottom: calc(var(--coin-y-multiplier) * 1rem - 3.5rem);
+  height: 9rem;
+  margin-bottom: 1.5rem;
+  position: absolute;
+  right: calc(var(--coin-x-multiplier) * 34% + 16%);
+  transform: translateX(50%) scale(calc(0.4 + var(--coin-scale-multiplier))) rotate(calc(var(--coin-rotation-multiplier) * -1deg));
+  transition: opacity 100ms linear 200ms;
+  width: 9rem;
+  z-index: 3;
+}
 
 .coin__front, .coin__middle, .coin__back, .coin::before, .coin__front::after, .coin__back::after {
   border-radius: 50%;
@@ -127,38 +154,43 @@
   width: 100%;
   z-index: 3;
 }
+
 .coin__front {
-  background-image: url("./rupee.png");
+  background-image: url("rupee.png");
   background-size: 100% 100%;
   transform: translateY(calc(var(--front-y-multiplier) * calc(3.5rem / 11) / 2)) scaleY(var(--front-scale-multiplier));
 }
+
 .coin__front::after {
   background: rgba(0, 0, 0, 0.2);
   content: "";
   opacity: var(--front-y-multiplier);
 }
+
 .coin__middle {
-  background: #0a192f;
   transform: translateY(calc(var(--middle-y-multiplier) * calc(3.5rem / 11) / 2)) scaleY(var(--middle-scale-multiplier));
 }
+
 .coin__back {
-  background-image: url("./rupee.png");
+  background-image: url("rupee.png");
   background-size: 100% 100%;
   transform: translateY(calc(var(--back-y-multiplier) * calc(3.5rem / 11) / 2)) scaleY(var(--back-scale-multiplier));
 }
+
 .coin__back::after {
   background: rgba(0, 0, 0, 0.2);
   content: "";
   opacity: var(--back-y-multiplier);
 }
+
 .coin::before {
   content: "";
   opacity: var(--shine-opacity-multiplier);
   transform: translateY(calc(var(--middle-y-multiplier) * calc(3.5rem / 11) / -2)) scaleY(var(--middle-scale-multiplier)) rotate(calc(var(--coin-rotation-multiplier) * 1deg));
   z-index: 10;
 }
+
 .coin::after {
-  background: #0a192f;
   content: "";
   height: calc(3.5rem / 11);
   left: 0;
@@ -171,27 +203,19 @@
 
 @keyframes shake {
   0% {
-    transform: rotate(4deg);
+      transform: rotate(4deg);
   }
   66% {
-    transform: rotate(-4deg);
+      transform: rotate(-4deg);
   }
   100% {
-    transform: rotate();
+      transform: rotate(0deg);
   }
 }
-/********* BODY STYLES *********/
+
 html,
 body {
   height: 100%;
-}
+  background-color: #0a192f;
 
-body {
-  align-items: center;
-  background: #0a192f;
-  display: flex;
-  justify-content: center;
-  -webkit-font-smoothing: antialiased;
 }
-
-/*# sourceMappingURL=style.css.map */
